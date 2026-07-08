@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { TrendingUp, Search, Sparkles, Share2, ArrowRight } from 'lucide-react';
 import { SERVICES } from '../data';
-import { Page } from '../types';
+import { useNavigate } from 'react-router-dom';
 
 const IconRenderer = ({ name, className }: { name: string; className: string }) => {
   switch (name) {
@@ -19,11 +19,8 @@ const IconRenderer = ({ name, className }: { name: string; className: string }) 
   }
 };
 
-interface ServicesPreviewProps {
-  setCurrentPage: (page: Page) => void;
-}
-
-export default function ServicesPreview({ setCurrentPage }: ServicesPreviewProps) {
+export default function ServicesPreview() {
+  const navigate = useNavigate();
   // Let's take the first 3 services for preview, to keep the landing page tight and encourage exploration
   const previewServices = SERVICES.slice(0, 3);
 
@@ -45,7 +42,7 @@ export default function ServicesPreview({ setCurrentPage }: ServicesPreviewProps
             <button
               id="view-all-services-btn"
               onClick={() => {
-                setCurrentPage('services');
+                navigate('/services');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
               className="group inline-flex items-center gap-1.5 px-6 py-3 rounded-full border border-slate-200 hover:border-indigo-600 bg-white hover:bg-indigo-50 text-slate-900 hover:text-indigo-700 font-semibold text-sm transition-all duration-300 shadow-sm cursor-pointer"

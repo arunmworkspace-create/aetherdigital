@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import { Sparkles, Mail, Send, CheckCircle2, ArrowRight } from 'lucide-react';
-import { Page } from '../types';
+import { useNavigate } from 'react-router-dom';
 
-interface FooterProps {
-  setCurrentPage: (page: Page) => void;
-}
-
-export default function Footer({ setCurrentPage }: FooterProps) {
+export default function Footer() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
@@ -19,8 +16,8 @@ export default function Footer({ setCurrentPage }: FooterProps) {
     }
   };
 
-  const handlePageLink = (page: Page) => {
-    setCurrentPage(page);
+  const handlePageLink = (path: string) => {
+    navigate(path);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -52,7 +49,7 @@ export default function Footer({ setCurrentPage }: FooterProps) {
             <ul className="flex flex-col gap-3.5 text-sm">
               <li>
                 <button
-                  onClick={() => handlePageLink('services')}
+                  onClick={() => handlePageLink('/services')}
                   className="hover:text-white transition-colors text-left cursor-pointer"
                 >
                   Performance Marketing
@@ -60,7 +57,7 @@ export default function Footer({ setCurrentPage }: FooterProps) {
               </li>
               <li>
                 <button
-                  onClick={() => handlePageLink('services')}
+                  onClick={() => handlePageLink('/services')}
                   className="hover:text-white transition-colors text-left cursor-pointer"
                 >
                   SEO & Search Mastery
@@ -68,7 +65,7 @@ export default function Footer({ setCurrentPage }: FooterProps) {
               </li>
               <li>
                 <button
-                  onClick={() => handlePageLink('services')}
+                  onClick={() => handlePageLink('/services')}
                   className="hover:text-white transition-colors text-left cursor-pointer"
                 >
                   Creative Strategy & Visuals
@@ -76,7 +73,7 @@ export default function Footer({ setCurrentPage }: FooterProps) {
               </li>
               <li>
                 <button
-                  onClick={() => handlePageLink('services')}
+                  onClick={() => handlePageLink('/services')}
                   className="hover:text-white transition-colors text-left cursor-pointer"
                 >
                   Social Ecosystems
@@ -91,7 +88,7 @@ export default function Footer({ setCurrentPage }: FooterProps) {
             <ul className="flex flex-col gap-3.5 text-sm">
               <li>
                 <button
-                  onClick={() => handlePageLink('home')}
+                  onClick={() => handlePageLink('/')}
                   className="hover:text-white transition-colors text-left cursor-pointer"
                 >
                   Home Landing
@@ -99,7 +96,7 @@ export default function Footer({ setCurrentPage }: FooterProps) {
               </li>
               <li>
                 <button
-                  onClick={() => handlePageLink('about')}
+                  onClick={() => handlePageLink('/about')}
                   className="hover:text-white transition-colors text-left cursor-pointer"
                 >
                   Our Methodology & Story
@@ -107,7 +104,7 @@ export default function Footer({ setCurrentPage }: FooterProps) {
               </li>
               <li>
                 <button
-                  onClick={() => handlePageLink('about')}
+                  onClick={() => handlePageLink('/about')}
                   className="hover:text-white transition-colors text-left cursor-pointer"
                 >
                   The Minds Behind Aether
@@ -115,7 +112,7 @@ export default function Footer({ setCurrentPage }: FooterProps) {
               </li>
               <li>
                 <button
-                  onClick={() => handlePageLink('contact')}
+                  onClick={() => handlePageLink('/contact')}
                   className="hover:text-white transition-colors text-left cursor-pointer"
                 >
                   Get in Touch

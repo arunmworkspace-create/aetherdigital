@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, ArrowRight, Sparkles } from 'lucide-react';
-import { Page } from '../types';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-interface NavbarProps {
-  currentPage: Page;
-  setCurrentPage: (page: Page) => void;
-}
-
-export default function Navbar({ currentPage, setCurrentPage }: NavbarProps) {
+export default function Navbar() {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -24,17 +21,16 @@ export default function Navbar({ currentPage, setCurrentPage }: NavbarProps) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks: { label: string; value: Page }[] = [
-    { label: 'Home', value: 'home' },
-    { label: 'Services', value: 'services' },
-    { label: 'About Us', value: 'about' },
-    { label: 'Contact', value: 'contact' },
+  const navLinks: { label: string; path: string }[] = [
+    { label: 'Home', path: '/' },
+    { label: 'Services', path: '/services' },
+    { label: 'About Us', path: '/about' },
+    { label: 'Contact', path: '/contact' },
   ];
 
-  const handleNavClick = (page: Page) => {
-    setCurrentPage(page);
+  const handleNavClick = (path: string) => {
+    navigate(path);
     setIsOpen(false);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -50,7 +46,7 @@ export default function Navbar({ currentPage, setCurrentPage }: NavbarProps) {
         {/* Brand Logo */}
         <button
           id="nav-logo"
-          onClick={() => handleNavClick('home')}
+          onClick={() => handleNavClick('/')}
           className="flex items-center gap-2 group cursor-pointer text-left"
         >
           <div className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center transition-transform duration-300 group-hover:scale-105 shadow-md">
@@ -69,12 +65,12 @@ export default function Navbar({ currentPage, setCurrentPage }: NavbarProps) {
         {/* Desktop Navigation */}
         <nav id="desktop-nav" className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => {
-            const isActive = currentPage === link.value;
+            const isActive = location.pathname === link.path;
             return (
               <button
-                key={link.value}
-                id={`nav-link-${link.value}`}
-                onClick={() => handleNavClick(link.value)}
+                key={link.path}
+                id={`nav-link-${link.path.replace('/', '') || 'home'}`}
+                onClick={() => handleNavClick(link.path)}
                 className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer ${
                   isActive ? 'text-indigo-600' : 'text-slate-600 hover:text-slate-950'
                 }`}
@@ -96,7 +92,7 @@ export default function Navbar({ currentPage, setCurrentPage }: NavbarProps) {
         <div className="hidden md:block">
           <button
             id="nav-cta-button"
-            onClick={() => handleNavClick('contact')}
+            onClick={() => handleNavClick('/contact')}
             className="flex items-center gap-1.5 px-6 py-2.5 rounded-full bg-slate-900 hover:bg-indigo-600 text-white font-semibold text-sm transition-all duration-300 shadow-sm hover:shadow-indigo-500/10 hover:-translate-y-0.5 cursor-pointer"
           >
             Get Started
@@ -127,12 +123,12 @@ export default function Navbar({ currentPage, setCurrentPage }: NavbarProps) {
           >
             <div className="px-6 py-6 flex flex-col gap-3">
               {navLinks.map((link) => {
-                const isActive = currentPage === link.value;
+                const isActive = location.pathname === link.path;
                 return (
                   <button
-                    key={link.value}
-                    id={`mobile-nav-link-${link.value}`}
-                    onClick={() => handleNavClick(link.value)}
+                    key={link.path}
+                    id={`mobile-nav-link-${link.path.replace('/', '') || 'home'}`}
+                    onClick={() => handleNavClick(link.path)}
                     className={`w-full text-left px-4 py-3 rounded-xl text-base font-medium transition-all ${
                       isActive
                         ? 'bg-indigo-50 text-indigo-700 border-l-4 border-indigo-600'
@@ -145,7 +141,7 @@ export default function Navbar({ currentPage, setCurrentPage }: NavbarProps) {
               })}
               <button
                 id="mobile-nav-cta"
-                onClick={() => handleNavClick('contact')}
+                onClick={() => handleNavClick('/contact')}
                 className="w-full flex items-center justify-center gap-2 mt-4 px-4 py-3.5 rounded-xl bg-indigo-600 text-stone-50 font-medium text-sm hover:bg-indigo-700 transition-colors shadow-md"
               >
                 Get Started

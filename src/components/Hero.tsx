@@ -1,14 +1,11 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, ChevronRight, Sparkles, MapPin, Award } from 'lucide-react';
-import { Page } from '../types';
+import { useNavigate } from 'react-router-dom';
 import { ASSETS } from '../data';
 
-interface HeroProps {
-  setCurrentPage: (page: Page) => void;
-}
-
-export default function Hero({ setCurrentPage }: HeroProps) {
+export default function Hero() {
+  const navigate = useNavigate();
   return (
     <section id="hero-section" className="relative pt-32 pb-24 md:pt-40 md:pb-32 overflow-hidden bg-gradient-to-b from-slate-50 via-slate-100 to-slate-200/50">
       {/* Abstract Background Accents */}
@@ -66,7 +63,7 @@ export default function Hero({ setCurrentPage }: HeroProps) {
               <button
                 id="hero-btn-solutions"
                 onClick={() => {
-                  setCurrentPage('services');
+                  navigate('/services');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
                 className="flex items-center justify-center gap-1.5 px-7 py-3.5 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm transition-all duration-300 shadow-lg shadow-indigo-600/20 hover:shadow-indigo-600/30 hover:-translate-y-0.5 cursor-pointer"
@@ -77,7 +74,7 @@ export default function Hero({ setCurrentPage }: HeroProps) {
               <button
                 id="hero-btn-methodology"
                 onClick={() => {
-                  setCurrentPage('about');
+                  navigate('/about');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
                 className="flex items-center justify-center gap-1 px-7 py-3.5 rounded-full bg-white border border-slate-200 hover:bg-slate-50 text-slate-800 font-semibold text-sm transition-all duration-300 shadow-sm cursor-pointer hover:border-slate-300"

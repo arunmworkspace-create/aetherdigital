@@ -1,13 +1,10 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, Sparkles, Send } from 'lucide-react';
-import { Page } from '../types';
+import { useNavigate } from 'react-router-dom';
 
-interface CTAProps {
-  setCurrentPage: (page: Page) => void;
-}
-
-export default function CTA({ setCurrentPage }: CTAProps) {
+export default function CTA() {
+  const navigate = useNavigate();
   return (
     <section id="cta-section" className="py-24 bg-transparent overflow-hidden relative">
       {/* Decorative vector meshes */}
@@ -46,7 +43,7 @@ export default function CTA({ setCurrentPage }: CTAProps) {
             <button
               id="cta-contact-btn"
               onClick={() => {
-                setCurrentPage('contact');
+                navigate('/contact');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
               className="flex items-center justify-center gap-1.5 w-full sm:w-auto px-8 py-4 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm transition-all duration-300 shadow-xl shadow-indigo-600/10 hover:shadow-indigo-500/20 hover:-translate-y-0.5 cursor-pointer"
@@ -58,7 +55,7 @@ export default function CTA({ setCurrentPage }: CTAProps) {
             <button
               id="cta-about-btn"
               onClick={() => {
-                setCurrentPage('about');
+                navigate('/about');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
               className="flex items-center justify-center gap-1 w-full sm:w-auto px-8 py-4 rounded-full bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-slate-600 text-slate-200 font-bold text-sm transition-all duration-300 cursor-pointer"

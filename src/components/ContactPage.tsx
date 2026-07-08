@@ -1,13 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Mail, Phone, MapPin, Sparkles, Send, CheckCircle2, Building, MessageSquare, Info } from 'lucide-react';
-import { Page } from '../types';
 
-interface ContactPageProps {
-  setCurrentPage: (page: Page) => void;
-}
-
-export default function ContactPage({ setCurrentPage }: ContactPageProps) {
+export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',

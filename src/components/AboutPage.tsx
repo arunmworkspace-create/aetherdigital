@@ -1,14 +1,11 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { TEAM, ASSETS } from '../data';
-import { Page } from '../types';
+import { useNavigate } from 'react-router-dom';
 import { Sparkles, Award, Heart, ShieldAlert, Zap, Compass, Building, Linkedin, MapPin, ArrowRight } from 'lucide-react';
 
-interface AboutPageProps {
-  setCurrentPage: (page: Page) => void;
-}
-
-export default function AboutPage({ setCurrentPage }: AboutPageProps) {
+export default function AboutPage() {
+  const navigate = useNavigate();
   const values = [
     {
       title: 'Mathematical Rigor',
@@ -240,7 +237,7 @@ export default function AboutPage({ setCurrentPage }: AboutPageProps) {
               <button
                 id="about-join-us-btn"
                 onClick={() => {
-                  setCurrentPage('contact');
+                  navigate('/contact');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
                 className="inline-flex items-center gap-1.5 px-6 py-3 rounded-full bg-slate-900 hover:bg-indigo-600 text-white font-bold text-xs transition-all duration-300 shadow-md cursor-pointer mt-2"

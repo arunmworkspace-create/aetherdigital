@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { SERVICES } from '../data';
-import { Page, ServiceItem } from '../types';
+import { ServiceItem } from '../types';
+import { useNavigate } from 'react-router-dom';
 import {
   TrendingUp,
   Search,
@@ -17,9 +18,6 @@ import {
   Target
 } from 'lucide-react';
 
-interface ServicesPageProps {
-  setCurrentPage: (page: Page) => void;
-}
 
 const IconRenderer = ({ name, className }: { name: string; className: string }) => {
   switch (name) {
@@ -36,7 +34,8 @@ const IconRenderer = ({ name, className }: { name: string; className: string }) 
   }
 };
 
-export default function ServicesPage({ setCurrentPage }: ServicesPageProps) {
+export default function ServicesPage() {
+  const navigate = useNavigate();
   const [selectedService, setSelectedService] = useState<string>(SERVICES[0].id);
 
   const activeService = SERVICES.find((s) => s.id === selectedService) || SERVICES[0];
@@ -201,7 +200,7 @@ export default function ServicesPage({ setCurrentPage }: ServicesPageProps) {
                   <button
                     id="service-panel-cta"
                     onClick={() => {
-                      setCurrentPage('contact');
+                      navigate('/contact');
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
                     className="flex items-center gap-1 text-sm font-bold text-indigo-600 hover:text-indigo-700 cursor-pointer group"
@@ -296,7 +295,7 @@ export default function ServicesPage({ setCurrentPage }: ServicesPageProps) {
           <button
             id="services-page-cta-btn"
             onClick={() => {
-              setCurrentPage('contact');
+              navigate('/contact');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
             className="flex items-center gap-1 px-6 py-3 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold mt-2 transition-all cursor-pointer shadow-md"
